@@ -37,5 +37,7 @@ ENV PATH=${CMAKE_BIN_PATH}:${JAVA_HOME}:${ANDROID_HOME}/cmdline-tools/latest/bin
 RUN pacman -Scc --noconfirm
 
 ENV LANG=en_US.UTF-8
-RUN echo "set fish_greeting" > /etc/fish/config.fish
-CMD ["fish"]
+COPY entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+CMD ["/usr/local/bin/entrypoint.sh"]
