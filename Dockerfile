@@ -24,11 +24,16 @@ RUN curl -sS https://dl.google.com/android/repository/${CLI_TOOL_VERSION} -o /tm
     && mv ${ANDROID_HOME}/cmdline-tools/cmdline-tools ${ANDROID_HOME}/cmdline-tools/latest \
     && rm /tmp/cli_tool.zip \
     && yes | sdkmanager --licenses \
-    && yes | sdkmanager "platform-tools" \
-        "platforms;android-$ANDROID_BUILD_VERSION" \
-        "build-tools;$ANDROID_TOOLS_VERSION" \
-        "cmake;$CMAKE_VERSION" \
-        "ndk;$NDK_VERSION" \
+    && yes | sdkmanager "build-tools;30.0.3" \
+            "build-tools;33.0.0" \
+            "build-tools;34.0.0" \
+            "cmake;3.22.1" \
+            "emulator" \
+            "ndk;23.1.7779620" \
+            "ndk;26.1.10909125" \
+            "platform-tools" \
+            "platforms;android-33" \
+            "platforms;android-34" \
     && rm -rf ${ANDROID_HOME}/.android \
     && chmod 777 -R /opt/android
 
