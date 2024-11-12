@@ -1,7 +1,7 @@
 FROM archlinux
 
 RUN pacman -Sy --needed --noconfirm base base-devel fish \
-    jdk17-openjdk git curl unzip tree neofetch \
+    jdk17-openjdk git curl unzip tree neofetch npm \
     nodejs-lts-hydrogen yarn nano
 
 RUN archlinux-java set java-17-openjdk
