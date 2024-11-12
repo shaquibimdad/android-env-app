@@ -1,7 +1,7 @@
 FROM archlinux
 
 RUN pacman -Sy --needed --noconfirm base base-devel fish \
-    jdk17-openjdk git curl unzip \
+    jdk17-openjdk git curl unzip tree neofetch \
     nodejs-lts-hydrogen yarn nano
 
 RUN archlinux-java set java-17-openjdk
@@ -27,7 +27,6 @@ RUN curl -sS https://dl.google.com/android/repository/${CLI_TOOL_VERSION} -o /tm
     && yes | sdkmanager "build-tools;34.0.0" \
             "build-tools;35.0.0" \
             "cmake;3.22.1" \
-            "emulator" \
             "ndk;26.1.10909125" \
             "platform-tools" \
             "platforms;android-31" \
