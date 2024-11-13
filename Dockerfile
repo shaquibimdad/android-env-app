@@ -2,9 +2,10 @@ FROM archlinux
 
 RUN pacman -Sy --needed --noconfirm base base-devel fish \
     jdk17-openjdk git curl unzip tree neofetch npm \
-    nodejs-lts-hydrogen yarn nano
+    nodejs-lts-hydrogen yarn nano htop
 
 RUN archlinux-java set java-17-openjdk
+
 ARG CLI_TOOL_VERSION=commandlinetools-linux-11076708_latest.zip
 ARG ANDROID_BUILD_VERSION=34
 ARG ANDROID_TOOLS_VERSION=34.0.0
@@ -39,6 +40,14 @@ RUN curl -sS https://dl.google.com/android/repository/${CLI_TOOL_VERSION} -o /tm
 
 ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk
 ENV PATH=${CMAKE_BIN_PATH}:${JAVA_HOME}:${ANDROID_HOME}/cmdline-tools/latest/bin:${ANDROID_HOME}/emulator:${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${PATH}
-RUN pacman -Scc --noconfirm
 
 ENV LANG=en_US.UTF-8
+
+RUN curl -sS https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz -o /tmp/google-cloud-cli.tar.gz \
+&& tar -xzf /tmp/google-cloud-cli.tar.gz -C /opt \
+&& /opt/google-cloud-sdk/install.sh --quiet \
+&& rm /tmp/google-cloud-cli.tar.gz
+
+ENV PATH=/opt/google-cloud-sdk/bin:${PATH}
+
+RUN pacman -Scc --noconfirm
